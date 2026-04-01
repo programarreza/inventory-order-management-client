@@ -32,4 +32,14 @@ export const createProductSchema = z.object({
   image: z.any().optional(),
 });
 
+export const createCategorySchema = z.object({
+  name: z
+    .string()
+    .min(1, "Category name is required")
+    .max(100, "Category name cannot exceed 100 characters"),
+
+  description: z.string().optional(),
+});
+
 export type CreateProductSchema = z.infer<typeof createProductSchema>;
+export type CreateCategorySchema = z.infer<typeof createCategorySchema>;

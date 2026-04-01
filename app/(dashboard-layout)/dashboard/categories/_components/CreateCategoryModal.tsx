@@ -6,35 +6,28 @@ import { toast } from "sonner";
 
 import RWForm from "@/components/form/RWForm";
 import RWInput from "@/components/form/RWInput";
-import RWSelectSearch from "@/components/form/RWSelectSearch";
 import CommonModal from "@/components/modals/CommonModal";
-import { useCreateFeeTypMutation } from "@/lib/Redux/features/finance/feeType/feeTypeApi";
-import { createFeeTypeSchema } from "@/schemas/finance.schema";
-import { feeTypeOptions } from "@/utils/constant";
+import { useCreateCategoryMutation } from "@/lib/Redux/features/catgeory/categoryApi";
+import { createCategorySchema } from "@/schemas/inventory.schema";
 
-interface CreateFeeTypeModalProps {
+interface CreateCategoryModalProps {
   isOpen: boolean;
   onClose?: () => void;
 }
 
-const CreateFeeTypeModal = ({ isOpen, onClose }: CreateFeeTypeModalProps) => {
+const CreateCategoryModal = ({ isOpen, onClose }: CreateCategoryModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [createFeeType] = useCreateFeeTypMutation();
+  const [createCategory] = useCreateCategoryMutation();
 
   if (!isOpen) return null;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Creating fee type...");
+    const toastId = toast.loading("Creating category...");
 
     setIsLoading(true);
 
     try {
-      const jsonData = {
-        feeName: data.feeName,
-        feeType: data.feeType,
-      };
-
-      const res = await createFeeType(jsonData).unwrap();
+      const res = await createCategory(data).unwrap();
 
       if (res?.success) {
         toast.success(res?.message, { id: toastId, duration: 3000 });
@@ -56,29 +49,26 @@ const CreateFeeTypeModal = ({ isOpen, onClose }: CreateFeeTypeModalProps) => {
   return (
     <CommonModal
       className="md:max-w-[600px]"
-      title="Create Fee Type"
+      title="Create Category"
       onClose={onClose}
     >
-      <RWForm resolver={zodResolver(createFeeTypeSchema)} onSubmit={onSubmit}>
-        <div className="grid md:grid-cols-2 gap-3 p-4">
+      <RWForm resolver={zodResolver(createCategorySchema)} onSubmit={onSubmit}>
+        <div className="grid md:grid-cols-1 gap-3 p-4">
           <div className="py-1">
             <RWInput
               requiredSign
-              label="Fee Name"
-              name="feeName"
-              placeholder="Enter fee name"
+              label="Category Name"
+              name="name"
+              placeholder="Enter category name"
               type="text"
             />
           </div>
-          <div className="">
-            <RWSelectSearch
-              requiredSign
-              label="Select Fee Type"
-              name="feeType"
-              options={feeTypeOptions.map((option) => ({
-                value: option.value,
-                label: option.label,
-              }))}
+          <div className="py-1">
+            <RWInput
+              label="Description"
+              name="description"
+              placeholder="Enter category description"
+              type="text"
             />
           </div>
         </div>
@@ -97,4 +87,4 @@ const CreateFeeTypeModal = ({ isOpen, onClose }: CreateFeeTypeModalProps) => {
   );
 };
 
-export default CreateFeeTypeModal;
+export default CreateCategoryModal;
