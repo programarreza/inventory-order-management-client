@@ -17,6 +17,10 @@ const DashboardSidebar = () => {
     switch (key) {
       case "products":
         return <ContentIcon className="text-2xl" />;
+      case "orders":
+        return <ContentIcon className="text-2xl" />;
+      case "categories":
+        return <ContentIcon className="text-2xl" />;
 
       default:
         return <DashboardIcon className="text-2xl" />;
@@ -43,6 +47,11 @@ const DashboardSidebar = () => {
             key: "categories",
             path: "/dashboard/categories",
             label: "categories",
+          },
+          {
+            key: "orders",
+            path: "/dashboard/orders",
+            label: "orders",
           },
         ];
 
