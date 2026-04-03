@@ -18,7 +18,16 @@ export const orderApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["orders"],
     }),
+
+    addOrder: builder.mutation({
+      query: (orderData) => ({
+        url: `/orders/create`,
+        method: "POST",
+        body: orderData,
+      }),
+      invalidatesTags: ["orders", "products"],
+    }),
   }),
 });
 
-export const { useGetOrdersQuery, useUpdateOrderStatusMutation } = orderApi;
+export const { useGetOrdersQuery, useUpdateOrderStatusMutation, useAddOrderMutation } = orderApi;

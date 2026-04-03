@@ -11,6 +11,7 @@ import clsx from "clsx";
 import Link, { default as NextLink } from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FiShoppingCart } from "react-icons/fi";
 import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import Cookies from "universal-cookie";
 
@@ -38,6 +39,7 @@ export const Navbar = () => {
   // Get logged user from Redux store.
   // IMPORTANT NOTE: Not using useLoggedUser hook here. because navbar all time mounted and auth change to re-render navbar. RTK Query again call api and get data.
   const loggedUser = useAppSelector(selectCurrentUser);
+  const selectedItems = useAppSelector((state: any) => state.cart?.selectedItems || 0);
 
   useEffect(() => {
     let lastScrollY = window.pageYOffset;
@@ -173,20 +175,29 @@ export const Navbar = () => {
                     <div className="h-11 w-11 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
                   </>
                 ) : (
-                  <>
+                  <div className="flex items-center gap-6">
+                    <NextLink href="/cart" className="relative flex items-center text-gray-700 hover:text-primary transition-colors">
+                      <FiShoppingCart size={24} />
+                      {selectedItems > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
+                          {selectedItems}
+                        </span>
+                      )}
+                    </NextLink>
+
                     {loggedUser ? (
                       <div className="flex items-center">
                         <NavbarDropdown />
                       </div>
                     ) : (
                       <Link
-                        className="hover:text-primary transition-colors"
+                        className="hover:text-primary transition-colors font-semibold"
                         href="/login"
                       >
                         Login
                       </Link>
                     )}
-                  </>
+                  </div>
                 )}
               </ul>
             </div>

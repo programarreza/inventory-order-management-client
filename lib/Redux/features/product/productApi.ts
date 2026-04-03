@@ -18,7 +18,15 @@ export const productApi = baseApi.injectEndpoints({
       }),
       providesTags: ["products"],
     }),
+
+    getSingleProduct: builder.query({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["products"],
+    }),
   }),
 });
 
-export const { useCreateProductMutation, useGetProductsQuery } = productApi;
+export const { useCreateProductMutation, useGetProductsQuery, useGetSingleProductQuery } = productApi;

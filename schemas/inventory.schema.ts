@@ -43,3 +43,10 @@ export const createCategorySchema = z.object({
 
 export type CreateProductSchema = z.infer<typeof createProductSchema>;
 export type CreateCategorySchema = z.infer<typeof createCategorySchema>;
+
+export const checkoutSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  number: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+});
