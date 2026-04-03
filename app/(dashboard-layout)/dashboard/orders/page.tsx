@@ -10,10 +10,11 @@ import {
 } from "@heroui/table";
 import { useState } from "react";
 
-import UpdateStatusModal from "./_components/UpdateStatusModal";
-
 import SkeletonTable from "@/components/SkeletonTable";
 import { useGetOrdersQuery } from "@/lib/Redux/features/order/orderApi";
+
+import UpdateStatusModal from "./_components/UpdateStatusModal";
+
 const rows = [
   { name: "SL", uid: "SL" },
   { name: "CUSTOMER NAME", uid: "CUSTOMER NAME" },
@@ -117,6 +118,8 @@ const Orders = () => {
           </Table>
         </div>
       </div>
+
+      {/* Update Status Modal */}
       {selectedOrder && (
         <UpdateStatusModal
           currentStatus={selectedOrder?.status}

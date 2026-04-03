@@ -21,6 +21,8 @@ const DashboardSidebar = () => {
         return <ContentIcon className="text-2xl" />;
       case "categories":
         return <ContentIcon className="text-2xl" />;
+      case "restocks":
+        return <ContentIcon className="text-2xl" />;
 
       default:
         return <DashboardIcon className="text-2xl" />;
@@ -52,6 +54,11 @@ const DashboardSidebar = () => {
             key: "orders",
             path: "/dashboard/orders",
             label: "orders",
+          },
+          {
+            key: "restocks",
+            path: "/dashboard/restocks",
+            label: "restocks",
           },
         ];
 
