@@ -59,7 +59,7 @@ const NavbarDropdown = () => {
             color="default"
             onClick={() =>
               router.push(
-                `${user?.role === "ih" ? "/dashboard/update-institute" : "/dashboard"}`,
+                `${user?.role === "user" ? "/dashboard/user-orders" : "/dashboard"}`,
               )
             }
           >

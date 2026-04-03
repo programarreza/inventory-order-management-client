@@ -23,6 +23,8 @@ const DashboardSidebar = () => {
         return <ContentIcon className="text-2xl" />;
       case "restocks":
         return <ContentIcon className="text-2xl" />;
+      case "user-orders":
+        return <ContentIcon className="text-2xl" />;
 
       default:
         return <DashboardIcon className="text-2xl" />;
@@ -59,6 +61,14 @@ const DashboardSidebar = () => {
             key: "restocks",
             path: "/dashboard/restocks",
             label: "restocks",
+          },
+        ];
+      case "user":
+        return [
+          {
+            key: "user-orders",
+            path: "/dashboard/user-orders",
+            label: "My Orders",
           },
         ];
 

@@ -3,6 +3,7 @@
 import Container from "@/components/Container";
 import RWForm from "@/components/form/RWForm";
 import RWInput from "@/components/form/RWInput";
+import useLoggedUser from "@/hooks/auth.hook";
 import { clearCart } from "@/lib/Redux/features/cart/cartSlice";
 import { useAddOrderMutation } from "@/lib/Redux/features/order/orderApi";
 import { RootState } from "@/lib/Redux/store/store";
@@ -19,6 +20,9 @@ export default function CheckoutPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const [createOrder, { isSuccess, isLoading }] = useAddOrderMutation();
+
+  const user = useLoggedUser();
+  console.log({user})
 
   const { grandTotal, totalPrice, selectedItems, products } = useSelector(
     (store: RootState) => (store as any).cart
@@ -43,7 +47,11 @@ export default function CheckoutPage() {
       if (res?.success) {
         toast.success("Order placed successfully!");
         dispatch(clearCart());
-        router.push("/");
+        if(user?.role === "user"){
+          router.push("/dashboard/user-orders");
+        }else{
+          router.push("/");
+        }
       }
     } catch (e: any) {
       toast.error(e?.data?.message || "Failed to place order.");
@@ -87,8 +95,7 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <RWInput
-                    requiredSign
-                    label="Email Address"
+                    label="Email Address (Optional)"
                     name="email"
                     placeholder="john@example.com"
                     type="email"

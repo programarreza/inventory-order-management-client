@@ -22,7 +22,7 @@ const roleBasedRoutes: Record<string, string[]> = {
     "/dashboard/orders",
     "/dashboard/restocks",
   ],
-  user: ["/dashboard/orders"],
+  user: ["/dashboard/user-orders"],
 };
 
 export function middleware(req: NextRequest) {

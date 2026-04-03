@@ -37,7 +37,6 @@ export const createCategorySchema = z.object({
     .string()
     .min(1, "Category name is required")
     .max(100, "Category name cannot exceed 100 characters"),
-
   description: z.string().optional(),
 });
 
@@ -46,7 +45,7 @@ export type CreateCategorySchema = z.infer<typeof createCategorySchema>;
 
 export const checkoutSchema = z.object({
   name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address").min(1, "Email is required"),
+  email: z.string().optional(),
   number: z.string().min(1, "Phone number is required"),
   address: z.string().min(1, "Address is required"),
 });
