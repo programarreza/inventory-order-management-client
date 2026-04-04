@@ -1,9 +1,13 @@
 import { z } from "zod";
 
 const loginValidationSchema = z.object({
-  email: z.string().trim().email("Please enter a valid email!"),
+  email: z.string({
+    message: "Email is required!",
+  }).trim().email("Please enter a valid email!"),
   password: z
-    .string()
+    .string({
+      message: "Password is required!",
+    })
     .trim()
     .min(6, "Password needs to be at least 6 characters!"),
 });

@@ -107,7 +107,7 @@ const LoginPage = () => {
           </div>
 
           <button
-            className="w-full py-4 mt-8 px-6 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-gray-200"
+            className="w-full py-4 mt-8 px-6 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-gray-200 cursor-pointer"
             type="submit"
           >
             Sign In
@@ -121,12 +121,12 @@ const LoginPage = () => {
           >
             Create account
           </Link>
-          <Link
+          {/* <Link
             className="text-gray-400 hover:text-gray-600 font-medium hover:underline"
             href="/forgot-password"
           >
             Forgot Password?
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
