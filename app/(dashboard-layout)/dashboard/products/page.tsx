@@ -27,7 +27,7 @@ const rows = [
   { name: "STATUS", uid: "STATUS" },
 ];
 
-const Products = () => {
+const ProductsPage = () => {
   const [openCreateProduct, setOpenCreateProduct] = useState(false);
 
   const { data, isLoading } = useGetProductsQuery("");
@@ -134,4 +134,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductsPage;

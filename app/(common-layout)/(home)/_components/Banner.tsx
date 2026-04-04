@@ -11,7 +11,10 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
-const Banner = ({ bannerGallery }: { bannerGallery: string[] }) => {
+import banner1 from "@/assets/images/banner-1.jpg";
+import banner2 from "@/assets/images/banner-2.webp";
+
+const Banner = () => {
   return (
     <div className="">
       <Swiper
@@ -28,17 +31,24 @@ const Banner = ({ bannerGallery }: { bannerGallery: string[] }) => {
         }}
         spaceBetween={30}
       >
-        {bannerGallery?.map((image, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={"banner-1"}>
             <Image
               alt=""
               className="w-full h-[320px] lg:h-[500px] object-cover object-center"
               height={1200}
-              src={image}
+              src={banner1}
               width={1200}
             />
           </SwiperSlide>
-        ))}
+          <SwiperSlide key={"banner-2"}>
+            <Image
+              alt=""
+              className="w-full h-[320px] lg:h-[500px] object-cover object-center"
+              height={1200}
+              src={banner2}
+              width={1200}
+            />
+          </SwiperSlide>
       </Swiper>
     </div>
   );
