@@ -1,9 +1,9 @@
 import {
-	AlertTriangle,
-	CheckCircle,
-	Clock,
-	DollarSign,
-	ShoppingBag
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  DollarSign,
+  ShoppingBag
 } from "lucide-react";
 import StatCard from "./Dashboard/StatCard";
 
@@ -17,7 +17,7 @@ export const StatCards = ({ stats }: any) => {
     },
     {
       title: "Revenue Today",
-      value: `$${stats?.revenueToday?.toLocaleString() || 0}`,
+      value: `৳${stats?.revenueToday?.toLocaleString() || 0}`,
       icon: DollarSign,
       color: "bg-emerald-500",
     },
