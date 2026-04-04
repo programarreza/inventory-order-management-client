@@ -14,9 +14,11 @@ import UpdateRestockModal from "./_components/UpdateRestockModal";
 
 import SkeletonTable from "@/components/SkeletonTable";
 import { useGetRestocksQuery } from "@/lib/Redux/features/restock/restockApi";
+import Image from "next/image";
 
 const rows = [
   { name: "SL", uid: "SL" },
+  { name: "IMAGE", uid: "IMAGE" },
   { name: "PRODUCT NAME", uid: "PRODUCT NAME" },
   { name: "STOCK", uid: "STOCK" },
   { name: "MIN STOCK", uid: "MIN STOCK" },
@@ -70,6 +72,23 @@ const Restocks = () => {
                   className="bg-white border-b border-b-gray-200"
                 >
                   <TableCell>{index + 1}</TableCell>
+                  <TableCell>
+                    {restock?.productId?.image ? (
+                      <Image
+                        alt={restock?.productId?.name}
+                        className="w-12 h-12 object-cover rounded"
+                        height={1200}
+                        src={restock?.productId?.image}
+                        width={1200}
+                      />
+                    ) : (
+                      <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
+                        <span className="text-gray-400 text-xs text-center">
+                          No Image
+                        </span>
+                      </div>
+                    )}
+                  </TableCell>
                   <TableCell>{restock?.productId?.name}</TableCell>
                   <TableCell>
                     <span className="text-red-500 font-semibold">
