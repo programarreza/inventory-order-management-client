@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FieldValues, SubmitHandler, useFormContext } from "react-hook-form";
+import { FaEye, FaEyeSlash, FaUserAlt, FaUserEdit, FaUserShield } from "react-icons/fa";
 import { toast } from "sonner";
 
 import RWForm from "@/components/form/RWForm";
@@ -59,22 +59,29 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="lg:w-[600px] bg-white rounded-xl p-12 mx-auto">
-        <div className="text-center py-8 text-2xl font-semibold">
-          <h3>Welcome Back</h3>
-          <p className="text-medium">Please login now</p>
+    <div className="flex justify-center items-center h-screen bg-gray-50/50">
+      <div className="lg:w-[600px] bg-white rounded-2xl shadow-2xl p-12 mx-4 sm:mx-auto border border-gray-100">
+        <div className="text-center pb-8">
+          <h3 className="text-3xl font-black tracking-tight bg-gradient-to-br from-indigo-600 to-emerald-600 bg-clip-text text-transparent">
+            Welcome Back
+          </h3>
+          <p className="text-gray-500 mt-2 font-medium uppercase tracking-widest text-xs">
+            Quick fill for testing:
+          </p>
         </div>
+
         <RWForm
           resolver={zodResolver(loginValidationSchema)}
           onSubmit={onSubmit}
         >
-          <div className="space-y-4">
+          <QuickLoginButtons />
+
+          <div className="space-y-6">
             <div className="py-1">
               <RWInput
-                label="Email"
+                label="Email Address"
                 name="email"
-                placeholder="Email"
+                placeholder="Enter your email"
                 size="lg"
                 type="email"
               />
@@ -82,34 +89,40 @@ const LoginPage = () => {
             <div className="py-1">
               <div className="relative">
                 <RWInput
-                  defaultValue="12345678"
                   label="Password"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Enter your password"
                   size="lg"
                   type={isShow ? "password" : "text"}
                 />
                 <button
-                  className="text-xl absolute cursor-pointer -mt-10  right-4"
+                  className="text-xl absolute cursor-pointer top-[18px] right-4 text-gray-400 hover:text-indigo-600 transition-colors"
                   type="button"
                   onClick={() => setIsShow(!isShow)}
                 >
-                  {isShow ? <FaEyeSlash size={25} /> : <FaEye size={25} />}
+                  {isShow ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
                 </button>
               </div>
             </div>
           </div>
 
           <button
-            className="w-full py-3 my-4 px-6 border rounded-lg border-gray-400 hover:bg-gray-200 font-semibold font-barlow text-gray-900 cursor-pointer"
+            className="w-full py-4 mt-8 px-6 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-bold transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-gray-200"
             type="submit"
           >
-            Login
+            Sign In
           </button>
         </RWForm>
-        <div className="flex justify-end">
+
+        <div className="mt-8 flex justify-between items-center text-sm">
           <Link
-            className="text-blue-500 w-fit text-sm font-medium underline"
+            className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline"
+            href="/register"
+          >
+            Create account
+          </Link>
+          <Link
+            className="text-gray-400 hover:text-gray-600 font-medium hover:underline"
             href="/forgot-password"
           >
             Forgot Password?
@@ -121,3 +134,38 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+const QuickLoginButtons = () => {
+  const { setValue } = useFormContext();
+
+  const handleQuickLogin = (email: string) => {
+    setValue("email", email, { shouldValidate: true, shouldDirty: true });
+    setValue("password", "12345678", { shouldValidate: true, shouldDirty: true });
+  };
+
+  return (
+    <div className="flex flex-wrap gap-3 mb-6 justify-center">
+      <button
+        type="button"
+        onClick={() => handleQuickLogin("admin@gmail.com")}
+        className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-full transition-all shadow-md hover:shadow-lg"
+      >
+        <FaUserShield /> Admin
+      </button>
+      <button
+        type="button"
+        onClick={() => handleQuickLogin("manager@gmail.com")}
+        className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-full transition-all shadow-md hover:shadow-lg"
+      >
+        <FaUserEdit /> Manager
+      </button>
+      <button
+        type="button"
+        onClick={() => handleQuickLogin("user@gmail.com")}
+        className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-full transition-all shadow-md hover:shadow-lg"
+      >
+        <FaUserAlt /> User
+      </button>
+    </div>
+  );
+};

@@ -1,7 +1,7 @@
 "use client ";
 
 import { Input } from "@heroui/input";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { IInput } from "@/types";
 
@@ -22,7 +22,7 @@ const RWInput = ({
   defaultValue = "",
 }: IProps) => {
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
 
@@ -34,20 +34,24 @@ const RWInput = ({
       >
         {label} {requiredSign && <span className="text-red-500">*</span>}
       </label>
-      <Input
-        {...register(name)}
-        defaultValue={defaultValue}
-        disabled={disabled}
-        errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
-        placeholder={placeholder}
-        radius="sm"
-        required={required}
-        size={size}
-        type={type}
-        variant={variant}
-        isInvalid={!!errors[name]}
-        // label={label}
+      <Controller
+        control={control}
         name={name}
+        render={({ field }) => (
+          <Input
+            {...field}
+            defaultValue={defaultValue}
+            disabled={disabled}
+            errorMessage={errors[name] ? (errors[name]?.message as string) : ""}
+            isInvalid={!!errors[name]}
+            placeholder={placeholder}
+            radius="sm"
+            required={required}
+            size={size}
+            type={type}
+            variant={variant}
+          />
+        )}
       />
     </div>
   );
