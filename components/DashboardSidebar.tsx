@@ -4,7 +4,14 @@ import { Tab, Tabs } from "@heroui/tabs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { ContentIcon, DashboardIcon } from "./icons";
+import {
+  ClipboardList,
+  Layers,
+  LayoutDashboard,
+  Package,
+  RefreshCw,
+  ShoppingCart
+} from "lucide-react";
 
 import useLoggedUser from "@/hooks/auth.hook";
 
@@ -14,20 +21,24 @@ const DashboardSidebar = () => {
 
   // Map tab keys to their corresponding icons
   const getIconForTab = (key: string) => {
+    const iconClass = "w-5 h-5 transition-colors group-data-[selected=true]:text-primary";
+    
     switch (key) {
+      case "dashboard":
+        return <LayoutDashboard className={iconClass} />;
       case "products":
-        return <ContentIcon className="text-2xl" />;
-      case "orders":
-        return <ContentIcon className="text-2xl" />;
+        return <Package className={iconClass} />;
       case "categories":
-        return <ContentIcon className="text-2xl" />;
+        return <Layers className={iconClass} />;
+      case "orders":
+        return <ShoppingCart className={iconClass} />;
       case "restocks":
-        return <ContentIcon className="text-2xl" />;
+        return <RefreshCw className={iconClass} />;
       case "user-orders":
-        return <ContentIcon className="text-2xl" />;
+        return <ClipboardList className={iconClass} />;
 
       default:
-        return <DashboardIcon className="text-2xl" />;
+        return <LayoutDashboard className={iconClass} />;
     }
   };
 

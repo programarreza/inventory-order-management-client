@@ -23,9 +23,6 @@ const ProductSummaryTable: React.FC<ProductSummaryTableProps> = ({ products }) =
     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
       <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
         <h3 className="text-lg font-bold text-[#272B35]">Product Summary</h3>
-        <button className="text-xs font-semibold text-primary hover:underline transition-all">
-          View All Products
-        </button>
       </div>
       
       <div className="overflow-x-auto">
