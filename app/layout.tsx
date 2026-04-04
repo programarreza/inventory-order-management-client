@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  icons: {
-    icon: {
-      url: "btapr-logo.png",
-      type: "image/png",
-    },
-  },
+  // icons: {
+  //   icon: {
+  //     url: "btapr-logo.png",
+  //     type: "image/png",
+  //   },
+  // },
 };
 
 export const viewport: Viewport = {
