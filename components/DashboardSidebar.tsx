@@ -51,6 +51,7 @@ const DashboardSidebar = () => {
       loggedUser.userRole?.toLowerCase()
     ) {
       case "admin":
+      case "manager":
         return [
           { key: "dashboard", path: "/dashboard", label: "dashboard" },
           {
